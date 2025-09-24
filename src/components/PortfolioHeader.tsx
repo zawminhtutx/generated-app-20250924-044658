@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
+import { ThemeToggle } from '@/components/ThemeToggle';
 const navLinks = [
   { name: 'About', href: '#about' },
   { name: 'Projects', href: '#projects' },
@@ -43,12 +44,18 @@ export const PortfolioHeader = () => {
                 <Menu />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right">
-              <NavLinks isMobile />
-            </SheetContent>
+<SheetContent side="right" className="flex flex-col">
+  <NavLinks isMobile />
+  <div className="mt-auto p-4">
+    <ThemeToggle />
+  </div>
+</SheetContent>
           </Sheet>
         ) : (
-          <NavLinks />
+          <div className="flex items-center gap-2">
+  <NavLinks />
+  <ThemeToggle />
+</div>
         )}
       </div>
     </motion.header>

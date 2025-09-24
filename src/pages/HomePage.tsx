@@ -138,30 +138,48 @@ const SkillsSection = () => (
     </MotionDiv>
   </Section>
 );
-const ContactSection = () => (
-  <Section id="contact" className="bg-muted/50">
-    <MotionDiv>
-      <SectionTitle>Let's Connect</SectionTitle>
-      <div className="max-w-2xl mx-auto">
-        <p className="text-center text-lg text-muted-foreground mb-8">
-          Have a project in mind or just want to say hello? Feel free to send me a message.
-        </p>
-        <form className="space-y-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <Input type="text" placeholder="Your Name" required className="py-6" />
-            <Input type="email" placeholder="Your Email" required className="py-6" />
-          </div>
-          <Textarea placeholder="Your Message" rows={6} required />
-          <div className="text-center">
-            <Button type="submit" size="lg" className="px-8">
-              Send Message
-            </Button>
-          </div>
-        </form>
-      </div>
-    </MotionDiv>
-  </Section>
-);
+const ContactSection = () => {
+  const [submitted, setSubmitted] = React.useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  return (
+    <Section id="contact" className="bg-muted/50">
+      <MotionDiv>
+        <SectionTitle>Let's Connect</SectionTitle>
+        <div className="max-w-2xl mx-auto">
+          {submitted ? (
+            <div className="text-center p-8 bg-background rounded-lg shadow-md">
+              <h3 className="text-2xl font-bold mb-2">Thank you!</h3>
+              <p className="text-muted-foreground">Your message has been sent successfully.</p>
+            </div>
+          ) : (
+            <>
+              <p className="text-center text-lg text-muted-foreground mb-8">
+                Have a project in mind or just want to say hello? Feel free to send me a message.
+              </p>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <Input type="text" placeholder="Your Name" required className="py-6" />
+                  <Input type="email" placeholder="Your Email" required className="py-6" />
+                </div>
+                <Textarea placeholder="Your Message" rows={6} required />
+                <div className="text-center">
+                  <Button type="submit" size="lg" className="px-8">
+                    Send Message
+                  </Button>
+                </div>
+              </form>
+            </>
+          )}
+        </div>
+      </MotionDiv>
+    </Section>
+  );
+};
 export function HomePage() {
   return (
     <div className="bg-background text-foreground font-sans antialiased">
